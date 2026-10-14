@@ -899,3 +899,14 @@ DESCRIPTION:
 4. app.js: Updated export HTML download filename to 'hyqoo-signature-...html'.
 5. app.js: Updated onboarding tour welcome popover text to reference Hyqoo Email Signature Studio.
 ================================================================================
+
+================================================================================
+DATE: 2026-10-14 — Outlook App Redirection & Pre-Copy Signature Flow
+================================================================================
+DESCRIPTION:
+1. index.html: Added 'Open Outlook' redirection button (ms-outlook:) and 'Signature Copied' status tag to Step 2 in both Classic Outlook and New Outlook instruction overlays.
+2. styles.css: Added styles for .step-redirect-btn with gold accent (#AA9269) hover micro-animations and .step-status-tag pill.
+3. app.js:
+   - Updated applyBtn to pre-copy the signature to clipboard immediately when the user clicks 'Apply Your Signature'.
+   - Added redirectToOutlook() handler to re-verify copy, show user toast, and launch the Outlook application (ms-outlook:).
+================================================================================

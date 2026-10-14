@@ -892,6 +892,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (applyBtn) {
         applyBtn.addEventListener('click', () => {
+            // Automatically copy signature so it's already in the clipboard
+            copySignature();
+
             if (selectedPlatform === 'outlook' && outlookInstructions) {
                 if (previewCanvas) previewCanvas.style.display = 'none';
                 outlookInstructions.classList.remove('hidden');
@@ -907,8 +910,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 newOutlookInstructions.classList.remove('hidden');
                 if (sideNav) sideNav.classList.add('disabled');
                 if (templateBar) templateBar.classList.add('disabled');
-            } else {
-                copySignature();
             }
         });
     }
@@ -921,6 +922,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (newOutlookCopyBtn) {
         newOutlookCopyBtn.addEventListener('click', copySignature);
+    }
+
+    // Direct Outlook app redirection handlers
+    function redirectToOutlook() {
+        copySignature();
+        showToast('Signature copied! Opening Outlook...');
+        setTimeout(() => {
+            window.location.href = 'ms-outlook:';
+        }, 150);
+    }
+
+    const classicOutlookRedirectBtn = document.getElementById('classic-outlook-redirect-btn');
+    if (classicOutlookRedirectBtn) {
+        classicOutlookRedirectBtn.addEventListener('click', redirectToOutlook);
+    }
+
+    const newOutlookRedirectBtn = document.getElementById('new-outlook-redirect-btn');
+    if (newOutlookRedirectBtn) {
+        newOutlookRedirectBtn.addEventListener('click', redirectToOutlook);
     }
 
     if (instructionsCloseBtn) {
