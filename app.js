@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const cursorFollow = document.getElementById('cursor-follow');
                     if (cursorFollow) {
                         const firstName = el.value.trim().split(' ')[0];
-                        cursorFollow.textContent = firstName ? firstName : 'Welcome';
+                        cursorFollow.textContent = firstName ? firstName : 'Hyqoo';
                     }
                 }
 

@@ -880,3 +880,11 @@ DESCRIPTION:
 3. Updated all template asset links to https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/.
 4. Updated package.json and README.md with repository references and clone commands.
 ================================================================================
+
+================================================================================
+DATE: 2026-10-14 — Cursor Text Update (Collaberan -> Hyqoo)
+================================================================================
+DESCRIPTION:
+1. index.html: Updated cursor-follow initial label from 'Collaberan' to 'Hyqoo'.
+2. app.js: Updated dynamic cursor fallback when name field is cleared to 'Hyqoo'.
+================================================================================
