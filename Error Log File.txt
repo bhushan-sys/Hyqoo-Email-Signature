@@ -870,3 +870,13 @@ DESCRIPTION:
 4. Documentation:
    - Updated TEMPLATE_RULES.md with the 150x54 Hyqoo Logo and 150x149 Profile Photo standardization rules.
 ================================================================================
+
+================================================================================
+DATE: 2026-10-14 — GitHub Repository Migration & Push to Hyqoo-Email-Signature
+================================================================================
+DESCRIPTION:
+1. Created and pushed branch 'main' to https://github.com/bhushan-sys/Hyqoo-Email-Signature.git.
+2. Configured upstream tracking: origin/main.
+3. Updated all template asset links to https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/.
+4. Updated package.json and README.md with repository references and clone commands.
+================================================================================
