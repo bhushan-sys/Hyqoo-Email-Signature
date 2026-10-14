@@ -712,3 +712,161 @@ Status:
 2. Git Push: Successfully pushed to https://github.com/bhushan-sys/Collabera-Email-Template.git (branch main).
 3. Vercel Live Deployment: https://collabera-email-template.vercel.app automatically rebuilt and verified with Playwright (0 console errors, full signature preview rendering cleanly).
 ================================================================================
+MODIFICATION LOG: REMOVE FOOTER & DIVIDER AND AUTO-FIT SIGNATURE PREVIEW
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: Hide the Feedback & CCPA Privacy Notice footer section and divider line
+             across all templates (Template 1, Template 2, Template 3), and resize
+             the signature preview frame to auto-fit snugly with zero excess whitespace.
+Changes Applied:
+1. Res/templates/template-1.js — Removed the horizontal divider line and the Feedback
+   & CCPA Privacy Notice footer table. Set bottom padding of the logo row to 0.
+2. Res/templates/template-2.js — Removed the horizontal divider line and the Feedback
+   & CCPA Privacy Notice footer table. Set top section padding-bottom to 0.
+3. Res/templates/template-3.js — Removed the horizontal divider line and the Feedback
+   & CCPA Privacy Notice footer table. Set top section padding-bottom to 0.
+4. styles.css — Changed #preview-frame min-height from 200px to 0 to prevent forced vertical stretching.
+5. app.js — Updated measureAndResize() to calculate precise table bounding height without
+   the 180px minimum floor, snugly auto-fitting the preview iframe to the signature dimensions.
+================================================================================
+MODIFICATION LOG: HIDE SECTION 04 LOGOS OPTION FROM SIDEBAR
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: Hide the Section 04 "Logos" option (President's Club, WLAB, Workplace For
+             Women, Great Place To Work) from the right sidebar panel.
+Changes Applied:
+1. index.html — Added inline style="display: none;" to #section-logos accordion container.
+2. styles.css — Added #section-logos { display: none !important; } to ensure the section is hidden cleanly.
+================================================================================
+MODIFICATION LOG: MAKE ALL SIDEBAR OPTIONS ALWAYS OPEN & NON-CLOSABLE
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: Ensure all sidebar options (01: Choose Email Platform, 02: Upload Your
+             Profile Image, 03: Enter signature details) are permanently open and not closable.
+Changes Applied:
+1. index.html — Converted accordion headers in Sections 02 and 03 from interactive buttons
+   to non-collapsible header divs with style="cursor: default;". Removed .chevron-circle
+   from Section 03. Explicitly ensured all sections and panels have the 'open' class.
+2. styles.css — Set .accordion-section default style to the active open state with
+   var(--panel-bg) and var(--panel-border). Set .accordion-panel to max-height: none,
+   opacity: 1, and overflow: visible. Set .chevron-circle to display: none !important.
+3. app.js — Removed the accordion header click collapse/expand listeners. Updated the
+   profile toggle handler to keep Section 02 open and visible regardless of toggle state.
+================================================================================
+MODIFICATION LOG: REMOVE COMPANY LOGOS STEP FROM HELP TOUR & REALIGN STEPS
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: Remove the "Company Logos" tour step from the onboarding help section
+             and realign the remaining steps into a seamless sequential flow.
+Changes Applied:
+1. app.js — Removed the { element: '#section-logos', ... } step from the Driver.js tour
+   configuration in startTour(). Aligned the remaining 7 steps (Welcome -> Signature Templates
+   -> Email Platform -> Profile Image -> Your Details -> Live Preview -> Apply Signature).
+2. README.md — Removed Step 5 ("Select Company Badges") from the Usage documentation
+   and realigned remaining steps.
+================================================================================
+MODIFICATION LOG: REPLACE COLLABERA SVG LOGO WITH HYQOO SVG LOGO
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: Replace the Collabera SVG logo with the official Hyqoo SVG logo across
+             all templates (Template 1, Template 2, Template 3) and top navbar while
+             maintaining the exact design, proportions, alignments, and spacings.
+Changes Applied:
+1. Res/Hyqoo Logo.svg — Created official Hyqoo vector logo SVG with exact viewBox
+   0 0 91 33 and brand fill #231F20 matching the official Hyqoo wordmark.
+2. Res/templates/template-1.js — Replaced Collabera logo with Hyqoo logo:
+   - Updated img tag to width="91" height="33" (alt="Hyqoo", src=".../Hyqoo%20Logo.svg").
+   - Preserved valign="middle" alignment with middle badges row (President's Club / WLAB)
+     and 32px left padding.
+3. Res/templates/template-2.js — Replaced Collabera logo with Hyqoo logo:
+   - Updated img tag to width="91" height="33" (alt="Hyqoo", src=".../Hyqoo%20Logo.svg").
+   - Preserved table structure, valign="middle", right badge alignment, and contact spacing.
+4. Res/templates/template-3.js — Replaced Collabera logo with Hyqoo logo:
+   - Updated img tag to width="91" height="33" (alt="Hyqoo", src=".../Hyqoo%20Logo.svg").
+   - Preserved table structure, valign="middle", and 14px padding above contact details.
+5. index.html — Updated top navbar brand logo to Hyqoo logo with proportional 66x24px dimensions.
+6. app.js — Added development fallback in updatePreview() and getHtmlWithPngImages() to resolve
+   local Res/ assets seamlessly prior to remote GitHub repository push.
+================================================================================
+MODIFICATION LOG: TEMPLATE 1 HYQOO LOGO SIZE INCREASE
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: In Template 1, increase the size of the Hyqoo logo to match the red
+             box marked by the user beneath the profile avatar photo.
+Changes Applied:
+1. Res/templates/template-1.js — Scaled Hyqoo logo image from 91x33 to 160x58:
+   - Width: 160px, Height: 58px (exact 2.76:1 aspect ratio preserved, zero distortion).
+   - Perfectly fills the red box footprint (182px wide x 59px tall) spanning below
+     the 150px avatar column with balanced vertical and horizontal margins.
+================================================================================
+MODIFICATION LOG: TEMPLATE 1 PREVIEW WIDTH REDUCTION & RESPONSIVENESS
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: In Template 1, reduce the preview width from the wide container (587px)
+             to snugly wrap the actual content (412px), matching the user's second
+             reference image, and ensure the signature card is fully responsive.
+Root Cause:
+1. Res/templates/template-1.js had a legacy style="min-width: 535px;" and width="100%"
+   originally meant for the 535px horizontal footer divider that was removed in earlier requests.
+2. An unconditional empty <td> wrapper for top-right badges forced full-width table expansion.
+3. styles.css had #preview-frame with width: 550px; min-width: 535px;.
+4. app.js had Math.max(w + 4, 540) in measureAndResize(), enforcing a 540px floor on the iframe.
+Changes Applied:
+1. Res/templates/template-1.js:
+   - Removed min-width: 535px; and replaced with max-width: 100%;.
+   - Removed width="100%" on the top section inner table.
+   - Removed width: 1%; on user details cell to allow natural shrink-to-fit layout.
+   - Made top-right badges conditionally rendered without wrapping in an unconditional empty table cell.
+2. styles.css:
+   - Updated #preview-frame with width: auto; min-width: 0; max-width: 100%;.
+3. app.js:
+   - Updated measureAndResize() to reset iframe width to 10px before measuring bounding
+     client rect to accurately compute natural shrink-to-fit table width (~364px).
+   - Removed the 540px floor, setting iframe width to exact table width + 4px (snugly yielding
+     a 412px card width matching the reference image).
+   - Added window resize listener to maintain real-time responsiveness on viewport adjustments.
+   - Updated scaleSignatureHtml() to avoid unnecessary scaling when min-width is absent.
+================================================================================
+MODIFICATION LOG: TEMPLATES 2 & 3 PREVIEW WIDTH REDUCTION, SPACING TIGHTENING & RESPONSIVENESS
+--------------------------------------------------------------------------------
+Date/Time: 2026-10-14
+Requirement: Apply the same responsive spacing tightening and width reduction to both
+             Template 2 and Template 3, eliminating excess empty whitespace and ensuring
+             the signature preview wraps snugly around the content across all templates.
+Changes Applied:
+1. Res/templates/template-2.js:
+   - Removed legacy min-width: 549px; on outer table and replaced with max-width: 100%;.
+   - Removed artificial width="100%" on inner tables to allow natural content shrink-to-fit.
+   - Tightened profile photo bottom padding from 16px to 12px.
+   - Balanced and tightened divider spacing to a uniform 20px on both sides of the vertical separator line.
+   - Streamlined top-right badges to render conditionally without an unconditional empty wrapper cell.
+2. Res/templates/template-3.js:
+   - Removed legacy min-width: 549px; on outer table and replaced with max-width: 100%;.
+   - Removed artificial width="100%" on inner tables to allow natural content shrink-to-fit.
+   - Tightened divider spacing to a balanced 20px on both sides, removing redundant padding-right.
+   - Tightened contact details top padding from 14px to 10px.
+   - Streamlined top-right badges to render conditionally without an unconditional empty wrapper cell.
+================================================================================
+
+
+
+
+
+================================================================================
+DATE: 2026-10-14 — Hyqoo Logo Resize, Profile Image Standardization & Website Update
+================================================================================
+DESCRIPTION:
+1. Standardized Hyqoo Logo size to 150px width across all templates:
+   - Res/templates/template-1.js: Preserved 150px width with exact mathematical aspect-ratio height (54px, 91:33 ratio) -> width="150" height="54".
+   - Res/templates/template-2.js: Scaled Hyqoo logo from 91x33 to width="150" height="54".
+   - Res/templates/template-3.js: Scaled Hyqoo logo from 91x33 to width="150" height="54".
+2. Standardized Profile Image size across all templates matching Template 1:
+   - Res/templates/template-1.js: width="150" height="149" (standardized baseline).
+   - Res/templates/template-2.js: Scaled profile image from 115x114 to width="150" height="149" centered within the 175px left column.
+   - Res/templates/template-3.js: Scaled profile image from 115x114 to width="150" height="149" with 18px right padding.
+3. Updated Website Domain to www.hyqoo.com across all templates:
+   - app.js: Updated currentFormData.website from 'www.collabera.com' to 'www.hyqoo.com'.
+   - Automatically populates {{website}} in template-1.js, template-2.js, and template-3.js (href="https://{{website}}").
+4. Documentation:
+   - Updated TEMPLATE_RULES.md with the 150x54 Hyqoo Logo and 150x149 Profile Photo standardization rules.
+================================================================================

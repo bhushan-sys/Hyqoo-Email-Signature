@@ -464,9 +464,10 @@ body.dark-theme .template-bar-tab.active {
     display: block;
     overflow: hidden;
     margin: 0 auto;
-    width: 550px;
-    min-width: 535px;
-    min-height: 200px;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 0;
 }
 
 /* ── Classic Outlook Instructions Overlay (Figma 1150-1737) ── */
@@ -695,16 +696,15 @@ body.dark-theme .instructions-close-btn:hover {
     flex: 1;
 }
 
-/* Closed state by default: Fill #FFFFFF & Stroke #E8E8E8 (img 1) */
+/* All sections permanently open: Fill rgba(249, 236, 216, 0.30) & Stroke rgba(195, 158, 97, 0.30) */
 .accordion-section {
-    background: #FFFFFF;
-    border: 0.5px solid #E8E8E8;
+    background: var(--panel-bg);
+    border: 0.5px solid var(--panel-border);
     border-radius: var(--section-radius);
     overflow: hidden;
     transition: background var(--transition-mid), border-color var(--transition-mid), box-shadow var(--transition-mid);
 }
 
-/* Open state: Fill rgba(249, 236, 216, 0.30) & Stroke rgba(195, 158, 97, 0.30) */
 .accordion-section.open,
 .accordion-section:has(.accordion-panel.open) {
     background: var(--panel-bg);
@@ -720,13 +720,8 @@ body.dark-theme .instructions-close-btn:hover {
     padding: 10px 10px;
     background: transparent;
     border: none;
-    cursor: pointer;
+    cursor: default;
     gap: 8px;
-    transition: background var(--transition-fast);
-}
-
-.accordion-header:hover {
-    background: rgba(195, 158, 97, 0.06);
 }
 
 .accordion-label {
@@ -752,51 +747,21 @@ body.dark-theme .instructions-close-btn:hover {
     white-space: nowrap;
 }
 
-/* ── Chevron Circle Wrapper with Drop Shadow (img 2 & img 3) ── */
+/* ── Chevron Circle (Hidden: sections are permanently open) ── */
 .chevron-circle {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #FFFFFF;
-    border: 0.5px solid #E8E8E8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    /* Drop shadow: X: 0, Y: 0, Blur: 2, Spread: 0, Color: #000000 at 10% opacity (img 3) */
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.10);
-    transition: transform var(--transition-mid), box-shadow var(--transition-mid), border-color var(--transition-mid);
+    display: none !important;
 }
 
-.accordion-header[aria-expanded="true"] .chevron-circle {
-    border-color: rgba(195, 158, 97, 0.40);
-    box-shadow: none;
-}
-
-.chevron {
-    color: var(--text-brand);
-    flex-shrink: 0;
-    transition: transform var(--transition-mid);
-    /* Default = pointing UP = section is OPEN (expanded) */
-    transform: rotate(0deg);
-}
-
-.accordion-header[aria-expanded="false"] .chevron {
-    /* Pointing DOWN = section is CLOSED (collapsed) */
-    transform: rotate(180deg);
-}
-
-/* ── Accordion Panel ── */
+/* ── Accordion Panel (Permanently Open) ── */
 .accordion-panel {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 300ms ease, padding 300ms ease, opacity 200ms ease;
-    opacity: 0;
-    padding: 0 5px;
+    overflow: visible;
+    max-height: none;
+    opacity: 1;
+    padding: 0 10px 10px;
 }
 
 .accordion-panel.open {
-    max-height: 600px;
+    max-height: none;
     opacity: 1;
     padding: 0 10px 10px;
 }
@@ -1357,7 +1322,10 @@ body.dark-theme .instructions-close-btn:hover {
 
 /* ═══════════════════════════════════════════════
    SECTION 03 — LOGOS GRID
-═══════════════════════════════════════════════ */
+#section-logos {
+    display: none !important;
+}
+
 .logos-helper {
     font-size: 12px;
     font-weight: 400;

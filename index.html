@@ -48,8 +48,8 @@
             <!-- Top Navbar Bar -->
             <div class="top-navbar">
                 <div class="navbar-brand">
-                    <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Collabera%20Logo.svg"
-                        alt="Collabera" height="24" style="height: 24px; display: block;" />
+                    <img src="Res/Hyqoo%20Logo.svg"
+                        alt="Hyqoo" height="24" width="66" style="height: 24px; width: 66px; display: block;" />
                     <span class="navbar-divider"></span>
                     <span class="navbar-title">Email Signature</span>
                 </div>
@@ -332,7 +332,8 @@
 
                 <!-- Section 02: Upload Your Profile Image -->
                 <div class="accordion-section open" id="section-profile">
-                    <button class="accordion-header" data-target="panel-profile" aria-expanded="true">
+                    <div class="accordion-header" data-target="panel-profile" aria-expanded="true"
+                        style="cursor: default;">
                         <div class="accordion-label">
                             <span class="accordion-num">02</span>
                             <span class="accordion-title-text">Upload Your Profile Image</span>
@@ -341,7 +342,7 @@
                             <input type="checkbox" id="profile-toggle" checked>
                             <span class="toggle-slider"></span>
                         </label>
-                    </button>
+                    </div>
                     <div class="accordion-panel open" id="panel-profile">
                         <div class="upload-dropzone" id="upload-dropzone">
                             <input type="file" id="profile-upload-input"
@@ -387,20 +388,15 @@
                 </div>
 
                 <!-- Section 03: Enter Signature Details -->
-                <div class="accordion-section" id="section-details">
-                    <button class="accordion-header" data-target="panel-details" aria-expanded="false">
+                <div class="accordion-section open" id="section-details">
+                    <div class="accordion-header" data-target="panel-details" aria-expanded="true"
+                        style="cursor: default;">
                         <div class="accordion-label">
                             <span class="accordion-num">03</span>
                             <span class="accordion-title-text">Enter signature details</span>
                         </div>
-                        <div class="chevron-circle">
-                            <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5">
-                                <polyline points="18 15 12 9 6 15" />
-                            </svg>
-                        </div>
-                    </button>
-                    <div class="accordion-panel" id="panel-details">
+                    </div>
+                    <div class="accordion-panel open" id="panel-details">
                         <div class="field-group">
                             <div class="floating-field">
                                 <input class="floating-input" type="text" id="name" name="name" placeholder=" "
@@ -449,8 +445,8 @@
                     </div>
                 </div>
 
-                <!-- Section 04: Logos -->
-                <div class="accordion-section" id="section-logos">
+                <!-- Section 04: Logos (Hidden) -->
+                <div class="accordion-section" id="section-logos" style="display: none;">
                     <button class="accordion-header" data-target="panel-logos" aria-expanded="false">
                         <div class="accordion-label">
                             <span class="accordion-num">04</span>

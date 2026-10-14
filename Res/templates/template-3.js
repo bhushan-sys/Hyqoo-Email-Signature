@@ -7,20 +7,20 @@ const template3 = {
     name: "Brand Guidelines — Template 3 (Horizontal Left Column Layout)",
     description: "Horizontal left column layout with profile photo next to name/title, vertical separator line, right logo, contact info, and configurable badge logos.",
     html: `
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 16px; color: #05262B; line-height: 1.4; min-width: 549px; text-align: left; background-color: #ffffff;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 16px; color: #05262B; line-height: 1.4; text-align: left; background-color: #ffffff; max-width: 100%;">
 
     <!-- Top Section: Left Profile/Name/Title + Vertical Divider + Right Contact/Badges -->
     <tr>
-        <td style="padding-bottom: 10px;">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+        <td style="padding-bottom: 0;">
+            <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     <!-- Left: Profile Image + Name & Title Horizontally Adjacent (Figma node 765:1260 / 767:1746) -->
-                    <td valign="middle" style="padding-right: 20px;">
+                    <td valign="middle">
                         <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 {{#if showProfileImage == 'true'}}
-                                <td valign="middle" style="padding-right: 18px;">
-                                    <img src="{{profileImage}}" width="115" height="114" alt="Profile Photo" style="display: block; width: 115px; height: 114px; border: 0; outline: none; text-decoration: none; clip-path: url(#avatar-barrel-mask); -webkit-clip-path: url(#avatar-barrel-mask);" />
+                                <td valign="middle" style="padding-right: 18px; width: 150px; min-width: 150px;">
+                                    <img src="{{profileImage}}" width="150" height="149" alt="Profile Photo" style="display: block; width: 150px; height: 149px; border: 0; outline: none; text-decoration: none; clip-path: url(#avatar-barrel-mask); -webkit-clip-path: url(#avatar-barrel-mask);" />
                                 </td>
                                 {{/if}}
                                 <td valign="middle" style="white-space: nowrap;">
@@ -42,41 +42,35 @@ const template3 = {
                     </td>
 
                     <!-- Gap left of Divider -->
-                    <td valign="middle" style="width: 16px; min-width: 16px;">&nbsp;</td>
+                    <td valign="middle" style="width: 20px; min-width: 20px;">&nbsp;</td>
 
                     <!-- Vertical Divider Line (Figma node 765:1266 / 767:1752) -->
                     <td valign="middle" style="width: 1px; min-width: 1px; padding: 0; border-left: 1px solid #B4BEBF; font-size: 1px; line-height: 1px;">&nbsp;</td>
 
                     <!-- Gap right of Divider -->
-                    <td valign="middle" style="width: 24px; min-width: 24px;">&nbsp;</td>
+                    <td valign="middle" style="width: 20px; min-width: 20px;">&nbsp;</td>
 
                     <!-- Right Column: Logo + Contacts + Badges (Figma node 765:1265 / 768:2468) -->
                     <td valign="middle">
-                        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <table cellpadding="0" cellspacing="0" border="0">
                             <tr>
                                 <td valign="top">
-                                    <!-- Collabera Logo + Top Badges Row -->
-                                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <!-- Hyqoo Logo + Top Badges Row -->
+                                    <table cellpadding="0" cellspacing="0" border="0">
                                         <tr>
                                             <td valign="middle">
-                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Collabera%20Logo.svg" alt="Collabera" width="230" height="33" style="display: block; width: 230px; height: 33px; border: 0;" />
+                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Hyqoo%20Logo.svg" alt="Hyqoo" width="150" height="54" style="display: block; width: 150px; height: 54px; border: 0; outline: none; text-decoration: none;" />
                                             </td>
-                                            <td valign="top" align="right" style="padding-left: 32px; padding-top: 5px;">
-                                                <table cellpadding="0" cellspacing="0" border="0">
-                                                    <tr>
-                                                        {{#if showWomenWp == 'true'}}
-                                                        <td valign="top" style="padding-left: 8px;">
-                                                            <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Women%20Workplace.svg" alt="Workplace for Women" width="56" height="50" style="display: block; width: 56px; height: 50px; border: 0;" />
-                                                        </td>
-                                                        {{/if}}
-                                                        {{#if showCertBadge == 'true'}}
-                                                        <td valign="top" style="padding-left: 8px;">
-                                                            <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Collabera_Talent_Solutions_Private_Limited_IN_English_2024_Certification_Badge.svg" alt="Great Place To Work" width="40" height="68" style="display: block; width: 40px; height: 68px; border: 0;" />
-                                                        </td>
-                                                        {{/if}}
-                                                    </tr>
-                                                </table>
+                                            {{#if showWomenWp == 'true'}}
+                                            <td valign="middle" style="padding-left: 18px;">
+                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Women%20Workplace.svg" alt="Workplace for Women" width="56" height="50" style="display: block; width: 56px; height: 50px; border: 0;" />
                                             </td>
+                                            {{/if}}
+                                            {{#if showCertBadge == 'true'}}
+                                            <td valign="middle" style="padding-left: 12px;">
+                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Collabera_Talent_Solutions_Private_Limited_IN_English_2024_Certification_Badge.svg" alt="Great Place To Work" width="40" height="68" style="display: block; width: 40px; height: 68px; border: 0;" />
+                                            </td>
+                                            {{/if}}
                                         </tr>
                                     </table>
                                 </td>
@@ -84,7 +78,7 @@ const template3 = {
 
                             <!-- Contact details block -->
                             <tr>
-                                <td style="padding-top: 14px; padding-bottom: 6px;">
+                                <td style="padding-top: 10px; padding-bottom: 6px;">
                                     <table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 16px; color: #05262B; line-height: 1.4;">
                                         {{#if mobile != ''}}
                                         <tr>
@@ -127,12 +121,12 @@ const template3 = {
                                         <tr>
                                             {{#if showPcBadge == 'true'}}
                                             <td valign="middle" style="padding-right: 16px;">
-                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/1_Badge.svg" alt="President's Club" width="78" height="78" style="display: block; width: 78px; height: 78px; border: 0;" />
+                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/1_Badge.svg" alt="President's Club" width="78" height="78" style="display: block; width: 78px; height: 78px; border: 0;" />
                                             </td>
                                             {{/if}}
                                             {{#if showWlab == 'true'}}
                                             <td valign="middle">
-                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Wlab%20Full.svg" alt="WLAB" width="163" height="69" style="display: block; width: 163px; height: 69px; border: 0;" />
+                                                <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Wlab%20Full.svg" alt="WLAB" width="163" height="69" style="display: block; width: 163px; height: 69px; border: 0;" />
                                             </td>
                                             {{/if}}
                                         </tr>
@@ -146,36 +140,6 @@ const template3 = {
         </td>
     </tr>
 
-    <!-- Horizontal Divider Line (Figma node 765:1289 / 767:1777 — 549px) -->
-    <tr>
-        <td style="padding-top: 10px; padding-bottom: 12px;">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr>
-                    <td style="border-top: 1px solid #B4BEBF; font-size: 1px; line-height: 1px; height: 1px;">&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
-    <!-- Footer Feedback & Privacy Section (Figma node 765:1290 / 767:1778) -->
-     <tr>
-        <td>
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr>
-                    <td style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 12px; color: #05262B; font-weight: 400; line-height: 1.6;">
-                        <span style="color: #05262B; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif;">How am I doing? Give feedback at our</span>
-                        <a href="https://apps.collabera.com/feedback/?eid={{email}}" target="_blank" style="color: #AA9269; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif; text-decoration: underline;">&nbsp;Center of Business Excellence</a>
-                        <span style="color: #05262B; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif;"> or call 1-866-398-6484</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 12px; line-height: 1.6; padding-top: 1px;">
-                        <a href="http://res.collabera.com/res/email.htm" target="_blank" style="color: #AA9269; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif; text-decoration: underline;">CCPA Privacy Notice / Email Confidentiality and Privacy</a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
 </table>
 `
 };

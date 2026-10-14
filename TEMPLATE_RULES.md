@@ -11,7 +11,8 @@ This document establishes the mandatory design rules, email client technical con
    - All templates MUST rely on `getHtmlWithPngImages()` in `app.js` to convert SVG elements into `2x Retina` PNG Base64 Data URLs (`data:image/png;base64,...`) prior to clipboard copying or HTML file export.
 
 2. **Aspect Ratio Enforcement**:
-   - Always preserve natural vector aspect ratios for all brand assets.
+   - `Hyqoo Logo.svg`: Natural size `91 × 33` (`2.76 : 1` ratio). HTML tags across all templates MUST use `width="150" height="54"` (`style="width: 150px; height: 54px;"`).
+   - `Profile Photo`: Barrel-masked avatar MUST be standardized across all templates at `width="150" height="149"` (`style="width: 150px; height: 149px;"`).
    - `Collabera Logo.svg`: Natural size `230 × 33` (`6.97 : 1` ratio). HTML tags MUST use `width="230" height="33"` (never `180 × 32`).
    - `Women Workplace.svg`: `56 × 50` (`1.12 : 1`).
    - `Certification Badge.svg`: `40 × 68` (`0.588 : 1`).

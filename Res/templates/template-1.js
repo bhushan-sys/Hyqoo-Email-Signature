@@ -8,12 +8,12 @@ const template1 = {
     name: "Brand Guidelines — Template 1",
     description: "Official Collabera email signature with optional logo selection. Newsreader italic name, Red Hat Display body, gold accent #AA9269, LinkedIn icon, and legal footer.",
     html: `
-<table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 16px; color: #05262B; line-height: 1.4; min-width: 535px; text-align: left; background-color: #ffffff;">
+<table cellpadding="0" cellspacing="0" border="0" style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 16px; color: #05262B; line-height: 1.4; text-align: left; background-color: #ffffff; max-width: 100%;">
 
     <!-- Top Section: Name, Contact & Top-Right Badges -->
     <tr>
         <td style="padding-bottom: 10px;">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <table cellpadding="0" cellspacing="0" border="0">
                 <tr>
                     {{#if showProfileImage == 'true'}}
                     <!-- Profile Photo Column (Figma node 767:1477) -->
@@ -27,7 +27,7 @@ const template1 = {
                     {{/if}}
 
                     <!-- Left: User + Contact Details -->
-                    <td valign="middle" style="font-family: 'Red Hat Display', Arial, sans-serif; width: 1%; white-space: nowrap;">
+                    <td valign="middle" style="font-family: 'Red Hat Display', Arial, sans-serif; white-space: nowrap;">
                         <!-- Name & Title -->
                         <table cellpadding="0" cellspacing="0" border="0" style="padding-bottom: 6px;">
                             <tr>
@@ -85,76 +85,39 @@ const template1 = {
                     </td>
 
                     <!-- Right: Top Badges (Women Workplace + Certification Badge) -->
-                    <td valign="top" align="right" style="padding-left: 0px;">
-                        <table cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                {{#if showWomenWp == 'true'}}
-                                <td valign="top" style="padding-left: 4px;">
-                                    <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Women%20Workplace.svg" alt="Most Preferred Workplace for Women" width="56" height="50" style="display: block; width: 56px; height: 50px; border: 0;" />
-                                </td>
-                                {{/if}}
-                                {{#if showCertBadge == 'true'}}
-                                <td valign="top" style="padding-left: 16px;">
-                                    <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Collabera_Talent_Solutions_Private_Limited_IN_English_2024_Certification_Badge.svg" alt="Great Place To Work Certified" width="40" height="68" style="display: block; width: 40px; height: 68px; border: 0;" />
-                                </td>
-                                {{/if}}
-                            </tr>
-                        </table>
+                    {{#if showWomenWp == 'true'}}
+                    <td valign="top" style="padding-left: 20px;">
+                        <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Women%20Workplace.svg" alt="Most Preferred Workplace for Women" width="56" height="50" style="display: block; width: 56px; height: 50px; border: 0;" />
                     </td>
+                    {{/if}}
+                    {{#if showCertBadge == 'true'}}
+                    <td valign="top" style="padding-left: 16px;">
+                        <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Collabera_Talent_Solutions_Private_Limited_IN_English_2024_Certification_Badge.svg" alt="Great Place To Work Certified" width="40" height="68" style="display: block; width: 40px; height: 68px; border: 0;" />
+                    </td>
+                    {{/if}}
                 </tr>
             </table>
         </td>
     </tr>
 
-    <!-- Middle Section: Collabera Logo + Middle Badges Row -->
+    <!-- Middle Section: Hyqoo Logo + Middle Badges Row -->
     <tr>
-        <td style="padding-bottom: 20px;">
+        <td style="padding-bottom: 0;">
             <table cellpadding="0" cellspacing="0" border="0" valign="middle">
                 <tr>
                     <td valign="middle">
-                        <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Collabera%20Logo.svg" alt="Collabera" width="230" height="33" style="display: block; width: 230px; height: 33px; border: 0; outline: none; text-decoration: none;" />
+                        <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Hyqoo%20Logo.svg" alt="Hyqoo" width="150" height="54" style="display: block; width: 150px; height: 54px; border: 0; outline: none; text-decoration: none;" />
                     </td>
                     {{#if showPcBadge == 'true'}}
                     <td valign="middle" style="padding-left: 32px;">
-                        <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/1_Badge.svg" alt="President's Club" width="78" height="78" style="display: block; width: 78px; height: 78px; border: 0;" />
+                        <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/1_Badge.svg" alt="President's Club" width="78" height="78" style="display: block; width: 78px; height: 78px; border: 0;" />
                     </td>
                     {{/if}}
                     {{#if showWlab == 'true'}}
                     <td valign="middle" style="padding-left: 32px;">
-                        <img src="https://raw.githubusercontent.com/bhushan-sys/Collabera-Email-Template/main/Res/Wlab%20Full.svg" alt="Women's Leadership Advisory Board" width="163" height="69" style="display: block; width: 163px; height: 69px; border: 0;" />
+                        <img src="https://raw.githubusercontent.com/bhushan-sys/Hyqoo-Email-Signature/main/Res/Wlab%20Full.svg" alt="Women's Leadership Advisory Board" width="163" height="69" style="display: block; width: 163px; height: 69px; border: 0;" />
                     </td>
                     {{/if}}
-                </tr>
-            </table>
-        </td>
-    </tr>
-
-    <!-- Divider Line (535px matching Figma node 767:1676) -->
-    <tr>
-        <td style="padding-bottom: 10px;">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr>
-                    <td style="border-top: 1px solid rgba(5, 38, 43, 0.50); height: 1px; line-height: 1px; font-size: 1px;">&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-
-    <!-- Footer: Feedback & Privacy -->
-    <tr>
-        <td>
-            <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tr>
-                    <td style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 12px; color: #05262B; font-weight: 400; line-height: 1.6;">
-                        <span style="color: #05262B; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif;">How am I doing? Give feedback at our</span>
-                        <a href="https://apps.collabera.com/feedback/?eid={{email}}" target="_blank" style="color: #AA9269; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif; text-decoration: underline;">&nbsp;Center of Business Excellence</a>
-                        <span style="color: #05262B; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif;"> or call 1-866-398-6484</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="font-family: 'Red Hat Display', Arial, sans-serif; font-size: 12px; line-height: 1.6; padding-top: 1px;">
-                        <a href="http://res.collabera.com/res/email.htm" target="_blank" style="color: #AA9269; font-size: 12px; font-family: 'Red Hat Display', Arial, sans-serif; text-decoration: underline;">CCPA Privacy Notice / Email Confidentiality and Privacy</a>
-                    </td>
                 </tr>
             </table>
         </td>

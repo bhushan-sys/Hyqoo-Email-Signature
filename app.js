@@ -32,50 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ─────────────────────────────────────────────────────────
-    // 1. ACCORDION — collapse / expand sections (Exclusive Open)
+    // 1. SECTIONS PERMANENTLY OPEN (Non-collapsible)
     // ─────────────────────────────────────────────────────────
-    document.querySelectorAll('.accordion-header').forEach(header => {
-        header.addEventListener('click', (e) => {
-            // Ignore click if user interacted directly with the toggle-switch checkbox
-            if (e.target.closest('.toggle-switch')) return;
-
-            const targetId = header.getAttribute('data-target');
-            const panel = document.getElementById(targetId);
-            const section = header.closest('.accordion-section');
-            const isOpen = panel.classList.contains('open');
-
-            // Close all sections first (except the permanently open platform section)
-            document.querySelectorAll('.accordion-section').forEach(sec => {
-                if (sec.id !== 'section-platform') sec.classList.remove('open')
-            });
-            document.querySelectorAll('.accordion-panel').forEach(pan => {
-                if (pan.id !== 'panel-platform') pan.classList.remove('open')
-            });
-            document.querySelectorAll('.accordion-header').forEach(hdr => {
-                if (hdr.getAttribute('data-target') !== 'panel-platform') hdr.setAttribute('aria-expanded', 'false')
-            });
-
-            const profileToggle = document.getElementById('profile-toggle');
-
-            if (!isOpen) {
-                // If it was closed, open it now
-                panel.classList.add('open');
-                header.setAttribute('aria-expanded', 'true');
-                if (section) section.classList.add('open');
-
-                if (targetId === 'panel-profile') {
-                    if (profileToggle) profileToggle.checked = true;
-                    currentFormData['showProfileImage'] = 'true';
-                    updatePreview();
-                }
-            } else if (targetId === 'panel-profile') {
-                // If the user explicitly clicked the already open profile section, it should close (already handled by the close-all above)
-                if (profileToggle) profileToggle.checked = false;
-                currentFormData['showProfileImage'] = 'false';
-                updatePreview();
-            }
-        });
-    });
+    // All sections (Platform, Profile Image, Signature Details) remain permanently open.
 
     // ─────────────────────────────────────────────────────────
     // 2. PROFILE IMAGE UPLOAD & TOGGLE (SECTION 02)
@@ -102,14 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileToggle) {
         profileToggle.addEventListener('change', () => {
             const isEnabled = profileToggle.checked;
-            const panel = document.getElementById('panel-profile');
-            const header = document.querySelector('[data-target="panel-profile"]');
-            const section = document.getElementById('section-profile');
 
             if (isEnabled) {
-                if (panel) panel.classList.add('open');
-                if (header) header.setAttribute('aria-expanded', 'true');
-                if (section) section.classList.add('open');
                 if (dropzone) dropzone.classList.remove('disabled');
 
                 if (!isCustomUpload) {
@@ -124,9 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 currentFormData['showProfileImage'] = 'true';
             } else {
-                if (panel) panel.classList.remove('open');
-                if (header) header.setAttribute('aria-expanded', 'false');
-                if (section) section.classList.remove('open');
                 if (dropzone) dropzone.classList.add('disabled');
                 currentFormData['showProfileImage'] = 'false';
             }
@@ -495,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Also include non-field template tokens (logos off by default)
     currentFormData.primaryColor = '#05262B';
     currentFormData.secondaryColor = '#AA9269';
-    currentFormData.website = 'www.collabera.com';
+    currentFormData.website = 'www.hyqoo.com';
     currentFormData.showProfileImage = (profileToggle && profileToggle.checked) ? 'true' : 'false';
     currentFormData.profileImage = DEFAULT_EXAMPLE_IMAGE;
     currentFormData.showPcBadge = 'false';
@@ -567,7 +517,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ─────────────────────────────────────────────────────────
     function updatePreview() {
         if (!activeTemplate || !activeTemplate.html || !previewFrame) return;
-        const compiled = compileTemplate(activeTemplate.html, currentFormData);
+        let compiled = compileTemplate(activeTemplate.html, currentFormData);
+
+        // Fallback for local assets during development or before remote GitHub push
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:') {
+            compiled = compiled.replace(/https:\/\/raw\.githubusercontent\.com\/bhushan-sys\/(Collabera-Email-Template|Hyqoo-Email-Signature)\/main\/Res\//g, './Res/');
+        }
 
         const doc = `<!DOCTYPE html>
 <html>
@@ -583,6 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
             overflow: visible;
             background: #ffffff;
             font-family: 'Red Hat Display', Arial, sans-serif;
+            width: fit-content;
         }
     </style>
 </head>
@@ -616,15 +572,17 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const iDoc = previewFrame.contentDocument || (previewFrame.contentWindow && previewFrame.contentWindow.document);
                 if (iDoc && iDoc.body) {
+                    // Reset iframe width to 10px so the table's natural shrink-to-fit width is accurately measured
+                    previewFrame.style.width = '10px';
                     const table = iDoc.querySelector('table');
-                    let w = table ? Math.ceil(table.getBoundingClientRect().width) : 540;
-                    let h = table ? Math.ceil(table.getBoundingClientRect().height) : 220;
+                    let w = table ? Math.ceil(table.getBoundingClientRect().width) : 0;
+                    let h = table ? Math.ceil(table.getBoundingClientRect().height) : 0;
 
-                    if (!w || w < 300) w = iDoc.body.scrollWidth || 540;
-                    if (!h || h < 100) h = iDoc.body.scrollHeight || iDoc.documentElement.scrollHeight || 220;
+                    if (!w || w < 50) w = iDoc.body.scrollWidth || 360;
+                    if (!h || h < 20) h = iDoc.body.scrollHeight || iDoc.documentElement.scrollHeight || 100;
 
-                    previewFrame.style.width = Math.max(w + 4, 540) + 'px';
-                    previewFrame.style.height = Math.max(h + 4, 180) + 'px';
+                    previewFrame.style.width = (w + 4) + 'px';
+                    previewFrame.style.height = (h + 4) + 'px';
                 }
             } catch (e) { }
         };
@@ -696,6 +654,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     };
 
                     loader.onerror = () => {
+                        // Fallback to local Res/ directory if remote GitHub raw asset 404s
+                        if (src && src.includes('/Res/')) {
+                            const localSrc = 'Res/' + src.split('/Res/')[1];
+                            loader.onerror = () => {
+                                console.warn('Failed to load SVG for conversion:', src);
+                                resolve();
+                            };
+                            loader.src = localSrc;
+                            return;
+                        }
                         console.warn('Failed to load SVG for conversion:', src);
                         resolve();
                     };
@@ -720,7 +688,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Detect the original min-width from the outermost table declaration
         const minWidthMatch = html.match(/min-width:\s*(\d+)px/);
-        const originalWidth = minWidthMatch ? parseInt(minWidthMatch[1], 10) : 549;
+        const originalWidth = minWidthMatch ? parseInt(minWidthMatch[1], 10) : TARGET_WIDTH;
 
         if (originalWidth <= TARGET_WIDTH) return html; // No scaling needed
 
@@ -1045,6 +1013,7 @@ document.addEventListener('DOMContentLoaded', () => {
     activeTemplate = (typeof templates !== 'undefined' && templates.length > 0) ? templates[0] : null;
     selectTemplate(0, true);
     updatePreview();
+    window.addEventListener('resize', updatePreview);
 
     // ─────────────────────────────────────────────────────────
     // FIRST-TIME USER TOUR & HELP BUTTON
@@ -1060,35 +1029,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 { element: '.template-bar', popover: { title: 'Signature Templates', description: 'Switch between different brand-approved templates here.', side: "bottom", align: 'start' } },
                 {
                     element: '#section-platform',
-                    popover: { title: 'Email Platform', description: 'Select your email client so we can provide tailored instructions for applying the signature.', side: "left", align: 'start' },
-                    onHighlightStarted: () => {
-                        const sec = document.getElementById('section-platform');
-                        if (sec && !sec.classList.contains('open')) sec.querySelector('.accordion-header').click();
-                    }
+                    popover: { title: 'Email Platform', description: 'Select your email client so we can provide tailored instructions for applying the signature.', side: "left", align: 'start' }
                 },
                 {
                     element: '#section-profile',
-                    popover: { title: 'Profile Image', description: 'You can optionally upload and crop your profile image here.', side: "left", align: 'start' },
-                    onHighlightStarted: () => {
-                        const sec = document.getElementById('section-profile');
-                        if (sec && !sec.classList.contains('open')) sec.querySelector('.accordion-header').click();
-                    }
+                    popover: { title: 'Profile Image', description: 'You can optionally upload and crop your profile image here.', side: "left", align: 'start' }
                 },
                 {
                     element: '#section-details',
-                    popover: { title: 'Your Details', description: 'Fill in your name, title, contact info, and socials. The signature updates automatically!', side: "left", align: 'start' },
-                    onHighlightStarted: () => {
-                        const sec = document.getElementById('section-details');
-                        if (sec && !sec.classList.contains('open')) sec.querySelector('.accordion-header').click();
-                    }
-                },
-                {
-                    element: '#section-logos',
-                    popover: { title: 'Company Logos', description: 'Toggle the brand and certification logos you want to display in your signature.', side: "left", align: 'start' },
-                    onHighlightStarted: () => {
-                        const sec = document.getElementById('section-logos');
-                        if (sec && !sec.classList.contains('open')) sec.querySelector('.accordion-header').click();
-                    }
+                    popover: { title: 'Your Details', description: 'Fill in your name, title, contact info, and socials. The signature updates automatically!', side: "left", align: 'start' }
                 },
                 { element: '.preview-area', popover: { title: 'Live Preview', description: 'See your signature change in real-time right here.', side: "top", align: 'center' } },
                 { element: '#apply-btn', popover: { title: 'Apply Signature', description: 'Once done, click here to get step-by-step instructions on how to copy and paste it into your email client.', side: "left", align: 'start' } }

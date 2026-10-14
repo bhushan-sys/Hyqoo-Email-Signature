@@ -1,23 +1,29 @@
 {
-  "name": "email-temp",
+  "name": "hyqoo-email-signature",
   "version": "1.0.0",
-  "description": "",
+  "description": "Interactive, brand-compliant email signature studio engineered for Outlook and Gmail compatibility",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "update-readme": "update-readme -p name-and-description"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bhushan-sys/Collabera-Email-Template.git"
+    "url": "git+https://github.com/bhushan-sys/Hyqoo-Email-Signature.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/bhushan-sys/Collabera-Email-Template/issues"
+    "url": "https://github.com/bhushan-sys/Hyqoo-Email-Signature/issues"
   },
-  "homepage": "https://github.com/bhushan-sys/Collabera-Email-Template#readme",
+  "homepage": "https://github.com/bhushan-sys/Hyqoo-Email-Signature#readme",
   "devDependencies": {
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0"
+  },
+  "dependencies": {
+    "update-readme": "^1.0.4"
   }
 }
