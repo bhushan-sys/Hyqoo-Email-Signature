@@ -798,7 +798,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `collabera-signature-${(currentFormData.name || 'user').toLowerCase().replace(/\s+/g, '-')}.html`;
+        a.download = `hyqoo-signature-${(currentFormData.name || 'user').toLowerCase().replace(/\s+/g, '-')}.html`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1025,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', () => {
             progressText: 'Step {{current}} of {{total}}',
             animate: true,
             steps: [
-                { popover: { title: 'Welcome!', description: 'Let us show you around the Collabera Email Signature Studio. We will help you create a brand-approved signature in seconds.', side: "center", align: 'start' } },
+                { popover: { title: 'Welcome!', description: 'Let us show you around the Hyqoo Email Signature Studio. We will help you create a brand-approved signature in seconds.', side: "center", align: 'start' } },
                 { element: '.template-bar', popover: { title: 'Signature Templates', description: 'Switch between different brand-approved templates here.', side: "bottom", align: 'start' } },
                 {
                     element: '#section-platform',

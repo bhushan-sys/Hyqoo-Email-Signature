@@ -888,3 +888,14 @@ DESCRIPTION:
 1. index.html: Updated cursor-follow initial label from 'Collaberan' to 'Hyqoo'.
 2. app.js: Updated dynamic cursor fallback when name field is cleared to 'Hyqoo'.
 ================================================================================
+
+================================================================================
+DATE: 2026-10-14 — Browser Tab Title & Branding Update
+================================================================================
+DESCRIPTION:
+1. index.html: Updated browser tab <title> to 'Hyqoo Email Signature Studio'.
+2. index.html: Added Hyqoo SVG favicon (<link rel="icon" type="image/svg+xml" href="Res/Hyqoo%20Logo.svg">).
+3. index.html: Updated meta description to reflect Hyqoo brand alignment.
+4. app.js: Updated export HTML download filename to 'hyqoo-signature-...html'.
+5. app.js: Updated onboarding tour welcome popover text to reference Hyqoo Email Signature Studio.
+================================================================================
